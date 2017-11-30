@@ -1,0 +1,40 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="toolbar_style">
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <item name="android:textColorSecondary">@color/toolbar_secondary</item>
+    </style>
+
+    <style name="pager_style" parent="AppTheme">
+        <item name="android:layout_gravity">top</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="card_view_style" parent="AppTheme">
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="card_layout_style" parent="card_view_style">
+        <item name="android:baselineAligned">false</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="card_crest_style" parent="card_layout_style">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:paddingTop">10dp</item>
+    </style>
+
+    <style name="card_name_style" parent="card_layout_style">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+</resources>
