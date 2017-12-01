@@ -112,7 +112,7 @@ public class ScoresProvider extends ContentProvider {
                 break;
 			case MATCHES_H2H:
 				retCursor = mOpenHelper.getReadableDatabase().query(
-						DatabaseContract.SCORES_TABLE,
+						DatabaseContract.TABLE_HEAD2HEAD,
 						projection, SCORES_H2H, selectionArgs, null, null, sortOrder);
 				break;
             default:
@@ -148,6 +148,22 @@ public class ScoresProvider extends ContentProvider {
                 }
                 getContext().getContentResolver().notifyChange(uri, null);
                 return returnCount;
+
+			case MATCHES_H2H:
+				db.beginTransaction();
+				returnCount = 0;
+				try {
+					for (ContentValues value : values) {
+						long id = db.insertWithOnConflict(DatabaseContract.TABLE_HEAD2HEAD, null, value,
+								SQLiteDatabase.CONFLICT_REPLACE);
+						if (id != -1) {
+							returnCount++;
+						}
+					}
+					db.setTransactionSuccessful();
+				} finally {
+					db.endTransaction();
+				}
             default:
                 return super.bulkInsert(uri, values);
         }

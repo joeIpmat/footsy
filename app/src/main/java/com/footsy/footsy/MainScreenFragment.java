@@ -27,7 +27,6 @@ public class MainScreenFragment extends Fragment
     private final String[] mFragmentDate = new String[1];
     private ScoresAdapter mAdapter;
     private static final int SCORES_LOADER = 0;
-	private FixtureInfo mFixturesInfo;
 
     public void setFragmentDate(String date) {
         mFragmentDate[0] = date;
@@ -53,11 +52,8 @@ public class MainScreenFragment extends Fragment
                 FixtureList.selectedMatchId = (int) selected.matchId;
                 mAdapter.notifyDataSetChanged();
 
-                //TODO PROBLEM HERE
-				mFixturesInfo = new FixtureInfo();
-				getFragmentManager().beginTransaction()
-						.replace(R.id.container, mFixturesInfo).addToBackStack(null)
-						.commit();
+				Intent intent = new Intent(getActivity(), FixtureInfo.class);
+				startActivity(intent);
 
                 Log.d(TAG, "The match ID is " + mAdapter.detailMatchId);
             }

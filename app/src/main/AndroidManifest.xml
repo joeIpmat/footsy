@@ -28,6 +28,7 @@
 
         <activity android:name=".MainActivity" />
         <activity android:name=".FixtureList"/>
+        <activity android:name=".FixtureInfo"/>
 
         <service android:name=".FetchService" />
     </application>

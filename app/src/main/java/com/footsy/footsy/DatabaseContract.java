@@ -13,10 +13,11 @@ import static com.footsy.footsy.DatabaseContract.ScoresTable.DATE_COL;
 public class DatabaseContract {
 
     public static final String SCORES_TABLE = "ScoresTable";
-    public static final String TABLE_HEAD2HEAD = "Table_Head2head";
+    public static final String TABLE_HEAD2HEAD = "TableHead2head";
 
     private static final String CONTENT_AUTHORITY = "com.footsy.footsy";
-    public static final String PATH = "scores";
+    public static final String SCORE_PATH = "scores";
+	public static final String H2H_PATH = "h2h";
     public static Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
 	public static final class H2hTable implements BaseColumns {
@@ -31,9 +32,9 @@ public class DatabaseContract {
 		public static final String GOAL_AWAY_TEAM = "goal_away_team";
 
 		public static final String CONTENT_TYPE =
-				ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
+				ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + H2H_PATH;
 		public static final String CONTENT_ITEM_TYPE =
-				ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
+				ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + H2H_PATH;
 
 		public static Uri buildH2hWithID() {
 			return BASE_CONTENT_URI.buildUpon().appendPath(MATCH_ID).build();
@@ -53,9 +54,9 @@ public class DatabaseContract {
         public static final String MATCH_DAY = "match_day";
 
         public static final String CONTENT_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + SCORE_PATH;
         public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + SCORE_PATH;
 
         public static Uri buildScoreWithDate() {
             return BASE_CONTENT_URI.buildUpon().appendPath(DATE_COL).build();

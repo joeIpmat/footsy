@@ -22,7 +22,7 @@ public class FixtureList extends AppCompatActivity {
         if (savedInstanceState == null) {
             mFixtures = new PagerFragment();
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, mFixtures)
+                    .replace(R.id.containerMain, mFixtures)
                     .commit();
         }
     }

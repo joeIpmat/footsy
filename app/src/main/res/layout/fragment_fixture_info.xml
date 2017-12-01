@@ -1,71 +1,71 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.footsy.footsy.FixtureInfo">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="20dp">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_marginRight="8dp"-->
+        <!--android:layout_marginTop="20dp">-->
 
-        <TextView
-            android:id="@+id/result"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:textSize="20sp"
-            tools:text="2 : 3" />
+        <!--<TextView-->
+            <!--android:id="@+id/result"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="20sp"-->
+            <!--tools:text="2 : 3" />-->
 
-        <TextView
-            android:id="@+id/home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/result"
-            android:paddingLeft="10dp"
-            android:paddingRight="8dp"
-            android:textSize="15sp"
-            tools:text="Home Team" />
+        <!--<TextView-->
+            <!--android:id="@+id/home"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_toLeftOf="@+id/result"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:paddingRight="8dp"-->
+            <!--android:textSize="15sp"-->
+            <!--tools:text="Home Team" />-->
 
-        <TextView
-            android:id="@+id/away"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/result"
-            android:gravity="end"
-            android:paddingLeft="8dp"
-            android:paddingRight="10dp"
-            android:textSize="15sp"
-            tools:text="Away Team" />
+        <!--<TextView-->
+            <!--android:id="@+id/away"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_toRightOf="@+id/result"-->
+            <!--android:gravity="end"-->
+            <!--android:paddingLeft="8dp"-->
+            <!--android:paddingRight="10dp"-->
+            <!--android:textSize="15sp"-->
+            <!--tools:text="Away Team" />-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
-    <RelativeLayout
-        android:id="@+id/stats_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/toolbar_primary"
-        android:orientation="horizontal">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/stats_header"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/toolbar_primary"-->
+        <!--android:orientation="horizontal">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:paddingBottom="8dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="5dp"
-            android:text="Statistics" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:paddingBottom="8dp"-->
+            <!--android:paddingLeft="16dp"-->
+            <!--android:paddingRight="16dp"-->
+            <!--android:paddingTop="5dp"-->
+            <!--android:text="Statistics" />-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
     <ListView
         android:id="@+id/statistics"
@@ -81,4 +81,4 @@
 
     <include layout="@layout/conerror" />
 
-</LinearLayout>
+</FrameLayout>

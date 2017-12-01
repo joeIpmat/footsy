@@ -5,11 +5,7 @@ import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CursorAdapter;
-import android.widget.TextView;
-
-import static com.footsy.footsy.R.id.container;
 
 /**
  * Created by Joe on 11/28/17.
@@ -30,7 +26,7 @@ public class H2hAdapter extends CursorAdapter {
 
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
-		View mItem = LayoutInflater.from(context).inflate(R.layout.scores_list_item, parent, false);
+		View mItem = LayoutInflater.from(context).inflate(R.layout.h2h_list_item, parent, false);
 		final ViewHolder mHolder = new ViewHolder(mItem);
 		mItem.setTag(mHolder);
 		return mItem;

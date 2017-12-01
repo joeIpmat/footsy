@@ -10,8 +10,8 @@ import android.provider.ContactsContract;
  */
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "Scores.db";
-    private static final int DATABASE_VERSION = 2;
+    public static final String DATABASE_NAME = "Footsy.db";
+    private static final int DATABASE_VERSION = 3;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -46,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ DatabaseContract.H2hTable.AWAY_TEAM + " INTEGER,"
 				+ DatabaseContract.H2hTable.HOME_TEAM + " INTEGER,"
 				+ DatabaseContract.H2hTable.GOAL_AWAY_TEAM + " INTEGER,"
-				+ DatabaseContract.H2hTable.GOAL_HOME_TEAM + " INTEGER"
+				+ DatabaseContract.H2hTable.GOAL_HOME_TEAM + " INTEGER,"
 				+ " UNIQUE (" + DatabaseContract.H2hTable.MATCH_ID + ") ON CONFLICT REPLACE"
 				+ " );";
         db.execSQL(CreateHead2HeadTable);
@@ -56,5 +56,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //Remove old values when upgrading.
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.SCORES_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.TABLE_HEAD2HEAD);
     }
 }
