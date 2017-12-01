@@ -31,6 +31,7 @@ public class DatabaseContract {
 		public static final String GOAL_HOME_TEAM = "goal_home_team";
 		public static final String GOAL_AWAY_TEAM = "goal_away_team";
 
+		public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(TABLE_HEAD2HEAD).build();
 		public static final String CONTENT_TYPE =
 				ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + H2H_PATH;
 		public static final String CONTENT_ITEM_TYPE =

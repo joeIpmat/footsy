@@ -111,9 +111,12 @@ public class ScoresProvider extends ContentProvider {
                         projection, SCORES_BY_LEAGUE, selectionArgs, null, null, sortOrder);
                 break;
 			case MATCHES_H2H:
-				retCursor = mOpenHelper.getReadableDatabase().query(
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        DatabaseContract.TABLE_HEAD2HEAD,
+                        projection, null, null, null, null, sortOrder);
+/*				retCursor = mOpenHelper.getReadableDatabase().query(
 						DatabaseContract.TABLE_HEAD2HEAD,
-						projection, SCORES_H2H, selectionArgs, null, null, sortOrder);
+						projection, SCORES_H2H, selectionArgs, null, null, sortOrder);*/
 				break;
             default:
                 throw new UnsupportedOperationException("Unknown Uri" + uri);

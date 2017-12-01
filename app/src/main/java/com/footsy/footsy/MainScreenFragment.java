@@ -1,5 +1,6 @@
 package com.footsy.footsy;
 
+import android.net.Uri;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -69,7 +70,8 @@ public class MainScreenFragment extends Fragment
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(getActivity(), DatabaseContract.ScoresTable.buildScoreWithDate(),
+        Uri uri = DatabaseContract.ScoresTable.buildScoreWithDate();
+        return new CursorLoader(getActivity(), uri,
                 null, null, mFragmentDate, null);
     }
 
