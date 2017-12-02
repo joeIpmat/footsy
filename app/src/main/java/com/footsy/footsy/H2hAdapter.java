@@ -27,14 +27,14 @@ public class H2hAdapter extends CursorAdapter {
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
 		View mItem = LayoutInflater.from(context).inflate(R.layout.h2h_list_item, parent, false);
-		final ViewHolder mHolder = new ViewHolder(mItem);
+		final H2HViewHolder mHolder = new H2HViewHolder(mItem);
 		mItem.setTag(mHolder);
 		return mItem;
 	}
 
 	@Override
 	public void bindView(View view, final Context context, Cursor cursor) {
-		final ViewHolder mHolder = (ViewHolder) view.getTag();
+		final H2HViewHolder mHolder = (H2HViewHolder) view.getTag();
 		mHolder.homeTeamName.setText(cursor.getString(COL_HOME));
 		mHolder.awayTeamName.setText(cursor.getString(COL_AWAY));
 		mHolder.score.setText(Utility.getScores(cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS)));

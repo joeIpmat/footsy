@@ -52,8 +52,7 @@ public class FetchService extends IntentService {
 		final String QUERY_H2H = "head2head";
 		Uri fetchBuilder = Uri.parse(BASE_URL).buildUpon().
 				appendPath(matchID).
-				appendQueryParameter(QUERY_H2H, Integer.toString(count)).
-                build();
+				appendQueryParameter(QUERY_H2H, Integer.toString(count)).build();
         Log.v(TAG, "The url for head2head we looking at is: " + fetchBuilder.toString());
         HttpURLConnection conn = null;
         BufferedReader reader = null;
@@ -247,10 +246,8 @@ public class FetchService extends IntentService {
         /** head to head **/
         try {
             JSONObject h2hData = new JSONObject(jsonData).getJSONObject(HEAD2HEAD);
-            JSONObject currentMatch = new JSONObject(jsonData).getJSONObject("fixture");
-
-			// JSONArray h2hMatches = new JSONObject(jsonData).getJSONArray(FIXTURES);
-            JSONArray h2hMatches = new JSONObject(jsonData).getJSONObject("head2head").getJSONArray(FIXTURES);
+			JSONObject currentMatch = new JSONObject(jsonData).getJSONObject("fixture");
+			JSONArray h2hMatches = new JSONObject(jsonData).getJSONObject("head2head").getJSONArray(FIXTURES);
 			Vector<ContentValues> values = new Vector<>(h2hMatches.length());
 
 			mHomeTeamwins = h2hData.optInt(HOMEWINS);
@@ -285,7 +282,7 @@ public class FetchService extends IntentService {
 			values.toArray(insertData);
 			inserted_data = mContext.getContentResolver()
 					.bulkInsert(DatabaseContract.H2hTable.CONTENT_URI, insertData);
-			Log.v(TAG,"Succesfully Inserted : " + String.valueOf(inserted_data));
+			Log.v(TAG,"Succesfully Inserted h2h : " + String.valueOf(inserted_data));
         } catch (JSONException e) {
             e.printStackTrace();
         }
