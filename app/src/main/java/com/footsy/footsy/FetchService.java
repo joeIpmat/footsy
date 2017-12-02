@@ -236,11 +236,11 @@ public class FetchService extends IntentService {
         String mHome;
         String mAway;
 		String mMatchDate;
-        int mHomeTeamwins;
-        int mAwayTeamWins;
-        int mDraws;
-		int mGoalsHomeTeam;
-		int mGoalsAwayTeam;
+        String mHomeTeamwins;
+        String mAwayTeamWins;
+        String mDraws;
+		String mGoalsHomeTeam;
+		String mGoalsAwayTeam;
 		ContentValues h2hValues = new ContentValues();
 
         /** head to head **/
@@ -250,9 +250,9 @@ public class FetchService extends IntentService {
 			JSONArray h2hMatches = new JSONObject(jsonData).getJSONObject("head2head").getJSONArray(FIXTURES);
 			Vector<ContentValues> values = new Vector<>(h2hMatches.length());
 
-			mHomeTeamwins = h2hData.optInt(HOMEWINS);
-			mAwayTeamWins = h2hData.optInt(AWAYWINS);
-			mDraws = h2hData.optInt(DRAWS);
+			mHomeTeamwins = h2hData.optString(HOMEWINS);
+			mAwayTeamWins = h2hData.optString(AWAYWINS);
+			mDraws = h2hData.optString(DRAWS);
 
 			mMatchDate = currentMatch.getString(DATE);
 			mMatchDate = mMatchDate.substring(0, mMatchDate.indexOf("T"));
@@ -267,8 +267,8 @@ public class FetchService extends IntentService {
 				JSONObject match_data = h2hMatches.getJSONObject(i);
 				mHome = match_data.getString(HOME_TEAM);
 				mAway = match_data.getString(AWAY_TEAM);
-				mGoalsAwayTeam = match_data.getJSONObject(RESULT).getInt(AWAY_GOALS);
-				mGoalsHomeTeam = match_data.getJSONObject(RESULT).getInt(HOME_GOALS);
+				mGoalsAwayTeam = match_data.getJSONObject(RESULT).getString(AWAY_GOALS);
+				mGoalsHomeTeam = match_data.getJSONObject(RESULT).getString(HOME_GOALS);
 
 				h2hValues.put(DatabaseContract.H2hTable.HOME_TEAM, mHome);
 				h2hValues.put(DatabaseContract.H2hTable.AWAY_TEAM, mAway);
@@ -281,7 +281,7 @@ public class FetchService extends IntentService {
 			ContentValues[] insertData = new ContentValues[values.size()];
 			values.toArray(insertData);
 			inserted_data = mContext.getContentResolver()
-					.bulkInsert(DatabaseContract.H2hTable.CONTENT_URI, insertData);
+					.bulkInsert(DatabaseContract.H2hTable.buildH2hWithID(), insertData);
 			Log.v(TAG,"Succesfully Inserted h2h : " + String.valueOf(inserted_data));
         } catch (JSONException e) {
             e.printStackTrace();
