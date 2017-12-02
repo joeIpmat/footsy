@@ -35,8 +35,10 @@ public class H2hAdapter extends CursorAdapter {
 	@Override
 	public void bindView(View view, final Context context, Cursor cursor) {
 		final H2HViewHolder mHolder = (H2HViewHolder) view.getTag();
-		mHolder.homeTeamName.setText(cursor.getString(COL_HOME));
-		mHolder.awayTeamName.setText(cursor.getString(COL_AWAY));
+		int homeIndex = cursor.getColumnIndex(DatabaseContract.H2hTable.HOME_TEAM);
+		int awayIntex = cursor.getColumnIndex(DatabaseContract.H2hTable.AWAY_TEAM);
+		mHolder.homeTeamName.setText(cursor.getString(homeIndex));
+		mHolder.awayTeamName.setText(cursor.getString(awayIntex));
 		mHolder.score.setText(Utility.getScores(cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS)));
 		mHolder.matchId = cursor.getDouble(COL_ID);
 	}

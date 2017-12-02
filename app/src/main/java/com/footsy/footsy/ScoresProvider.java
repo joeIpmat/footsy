@@ -4,6 +4,7 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
@@ -156,14 +157,18 @@ public class ScoresProvider extends ContentProvider {
 				db.beginTransaction();
 				returnCount = 0;
 				try {
-					for (ContentValues value : values) {
-						long id = db.insertWithOnConflict(DatabaseContract.TABLE_HEAD2HEAD, null, value,
-								SQLiteDatabase.CONFLICT_REPLACE);
-						if (id != -1) {
-							returnCount++;
-						}
-					}
-					db.setTransactionSuccessful();
+                    for (ContentValues value : values) {
+                        long id = db.insertWithOnConflict(DatabaseContract.TABLE_HEAD2HEAD, null, value,
+                                SQLiteDatabase.CONFLICT_REPLACE);
+                        if (id != -1) {
+                            returnCount++;
+                        } else {
+                            throw new SQLException("Failed to insert row into " + uri);
+                        }
+                    }
+                    db.setTransactionSuccessful();
+                } catch (IllegalStateException e) {
+				    e.printStackTrace();
 				} finally {
 					db.endTransaction();
 				}
@@ -171,7 +176,7 @@ public class ScoresProvider extends ContentProvider {
 				return returnCount;
 
             default:
-                return super.bulkInsert(uri, values);
+                return -1;
         }
     }
 
