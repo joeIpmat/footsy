@@ -26,7 +26,7 @@ public class ScoresProvider extends ContentProvider {
     private static final String SCORES_BY_LEAGUE = DatabaseContract.ScoresTable.LEAGUE_COL + " = ?";
     private static final String SCORES_BY_DATE = DatabaseContract.ScoresTable.DATE_COL + " LIKE ?";
     private static final String SCORES_BY_ID = DatabaseContract.ScoresTable.MATCH_ID + " = ?";
-	private static final String SCORES_H2H = DatabaseContract.H2hTable.MATCH_ID + " = ?";
+	private static final String SCORES_H2H = DatabaseContract.H2hTable.MATCH_ID + " LIKE ?";
 
     static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -112,8 +112,11 @@ public class ScoresProvider extends ContentProvider {
                 break;
 			case MATCHES_H2H:
 				retCursor = mOpenHelper.getReadableDatabase().query(
-						DatabaseContract.TABLE_HEAD2HEAD,
-						projection, SCORES_H2H, selectionArgs, null, null, sortOrder);
+						DatabaseContract.TABLE_HEAD2HEAD, projection, null, null,
+						null, null, sortOrder);
+//				retCursor = mOpenHelper.getReadableDatabase().query(
+//						DatabaseContract.TABLE_HEAD2HEAD,
+//						projection, SCORES_H2H, selectionArgs, null, null, sortOrder);
 				break;
             default:
                 throw new UnsupportedOperationException("Unknown Uri" + uri);
@@ -164,6 +167,9 @@ public class ScoresProvider extends ContentProvider {
 				} finally {
 					db.endTransaction();
 				}
+				getContext().getContentResolver().notifyChange(uri, null);
+				return returnCount;
+
             default:
                 return super.bulkInsert(uri, values);
         }

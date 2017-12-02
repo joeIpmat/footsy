@@ -246,15 +246,15 @@ public class FetchService extends IntentService {
         /** head to head **/
         try {
             JSONObject h2hData = new JSONObject(jsonData).getJSONObject(HEAD2HEAD);
-
-			JSONArray h2hMatches = new JSONObject(jsonData).getJSONArray(FIXTURES);
+			JSONObject currentMatch = new JSONObject(jsonData).getJSONObject("fixture");
+			JSONArray h2hMatches = new JSONObject(jsonData).getJSONObject("head2head").getJSONArray(FIXTURES);
 			Vector<ContentValues> values = new Vector<>(h2hMatches.length());
 
 			mHomeTeamwins = h2hData.optInt(HOMEWINS);
 			mAwayTeamWins = h2hData.optInt(AWAYWINS);
 			mDraws = h2hData.optInt(DRAWS);
 
-			mMatchDate = h2hData.getString(DATE);
+			mMatchDate = currentMatch.getString(DATE);
 			mMatchDate = mMatchDate.substring(0, mMatchDate.indexOf("T"));
 
 			h2hValues.put(DatabaseContract.H2hTable.MATCH_ID, matchID);
@@ -281,8 +281,8 @@ public class FetchService extends IntentService {
 			ContentValues[] insertData = new ContentValues[values.size()];
 			values.toArray(insertData);
 			inserted_data = mContext.getContentResolver()
-					.bulkInsert(DatabaseContract.BASE_CONTENT_URI, insertData);
-			Log.v(TAG,"Succesfully Inserted : " + String.valueOf(inserted_data));
+					.bulkInsert(DatabaseContract.H2hTable.CONTENT_URI, insertData);
+			Log.v(TAG,"Succesfully Inserted h2h : " + String.valueOf(inserted_data));
         } catch (JSONException e) {
             e.printStackTrace();
         }

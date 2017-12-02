@@ -22,7 +22,7 @@ import android.widget.TextView;
 public class FixtureInfoFragment extends Fragment
 		implements LoaderManager.LoaderCallbacks<Cursor> {
 
-	private final String mID = new String();
+	//private final String mID = new String();
     private FrameLayout mProgressPage;
     private RelativeLayout mErrorPage;
     private RelativeLayout mEmptyPage;
@@ -57,8 +57,8 @@ public class FixtureInfoFragment extends Fragment
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		return new CursorLoader(getActivity(), DatabaseContract.H2hTable.buildH2hWithID(),
-				null, mID, null, null);
+		Uri uri = DatabaseContract.H2hTable.buildH2hWithID();
+		return new CursorLoader(getActivity(), uri, null, null, null, null);
 	}
 
 	@Override

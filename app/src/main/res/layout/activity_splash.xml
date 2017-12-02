@@ -8,9 +8,31 @@
     tools:context="com.footsy.footsy.Splash">
 
     <ImageView
+        android:id="@+id/logo"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/football"/>
+        android:src="@drawable/football" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="footsy"
+        android:layout_centerInParent="true"
+        android:textSize="30dp"
+        android:textColor="#000000"
+        android:layout_above="@id/logo"
+        android:paddingBottom="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The world of football in your hand"
+        android:layout_centerInParent="true"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        android:paddingTop="20dp"
+        android:layout_below="@id/logo"/>
 
 </RelativeLayout>

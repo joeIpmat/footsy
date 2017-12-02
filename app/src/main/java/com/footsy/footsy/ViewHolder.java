@@ -29,6 +29,4 @@ public class ViewHolder {
         awayCrest = view.findViewById(R.id.away_crest);
     }
 
-
-
 }
