@@ -75,10 +75,10 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"></ListView>
 
-    <include layout="@layout/conprogress" />
+    <!--<include layout="@layout/conprogress" />-->
 
-    <include layout="@layout/conempty" />
+    <!--<include layout="@layout/conempty" />-->
 
-    <include layout="@layout/conerror" />
+    <!--<include layout="@layout/conerror" />-->
 
 </FrameLayout>

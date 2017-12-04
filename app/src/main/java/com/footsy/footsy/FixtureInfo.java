@@ -1,8 +1,12 @@
 package com.footsy.footsy;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ViewGroup;
+
+import java.util.List;
 
 /**
  * Created by Joe on 11/30/17.
@@ -11,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 public class FixtureInfo extends AppCompatActivity {
 
 	private FixtureInfoFragment mFixtureInfo;
+	private H2hAdapter mAdapter;
 	public static int selectedMatchId;
 
 	@Override
@@ -22,11 +27,10 @@ public class FixtureInfo extends AppCompatActivity {
 		getSupportActionBar().setCustomView(R.layout.actionbar);
 
 		if (savedInstanceState == null) {
-			mFixtureInfo = new FixtureInfoFragment();
+			FixtureInfoFragment mFixtureInfo = new FixtureInfoFragment();
 			getSupportFragmentManager().beginTransaction()
 					.replace(R.id.containerMain, mFixtureInfo)
 					.commit();
 		}
 	}
-
 }

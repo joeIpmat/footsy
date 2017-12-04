@@ -36,11 +36,10 @@ public class DatabaseContract {
 		public static final String CONTENT_ITEM_TYPE =
 				ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + H2H_PATH;
 
-		public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(TABLE_HEAD2HEAD).build();
+		//public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(TABLE_HEAD2HEAD).build();
 
 		public static Uri buildH2hWithID() {
-			return CONTENT_URI;
-//					BASE_CONTENT_URI.buildUpon().appendPath(MATCH_ID).build();
+			return BASE_CONTENT_URI.buildUpon().appendPath(MATCH_ID).build();
 		}
 	}
 

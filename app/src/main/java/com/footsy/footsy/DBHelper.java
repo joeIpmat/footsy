@@ -11,7 +11,7 @@ import android.provider.ContactsContract;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Footsy.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -58,4 +58,5 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.SCORES_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.TABLE_HEAD2HEAD);
     }
+
 }

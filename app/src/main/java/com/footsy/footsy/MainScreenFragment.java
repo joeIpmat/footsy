@@ -1,6 +1,5 @@
 package com.footsy.footsy;
 
-import android.net.Uri;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -28,6 +27,7 @@ public class MainScreenFragment extends Fragment
     private final String[] mFragmentDate = new String[1];
     private ScoresAdapter mAdapter;
     private static final int SCORES_LOADER = 0;
+	private static String matchIDclick = "";
 
     public void setFragmentDate(String date) {
         mFragmentDate[0] = date;
@@ -48,15 +48,13 @@ public class MainScreenFragment extends Fragment
         mScoreList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ViewHolder selected = (ViewHolder) view.getTag();
-                mAdapter.detailMatchId = selected.matchId;
-                FixtureList.selectedMatchId = (int) selected.matchId;
-                mAdapter.notifyDataSetChanged();
+				/** get the matchID **/
+				Cursor curr = (Cursor) mScoreList.getItemAtPosition(position);
+				matchIDclick = curr.getString(8).substring(1);
+				//Log.d("Position:", Integer.toString(position) + "Cursor: " + name);
 
 				Intent intent = new Intent(getActivity(), FixtureInfo.class);
 				startActivity(intent);
-
-                Log.d(TAG, "The match ID is " + mAdapter.detailMatchId);
             }
         });
 
@@ -68,10 +66,14 @@ public class MainScreenFragment extends Fragment
         getActivity().startService(serviceStart);
     }
 
+	public static String getClickedID() {
+		return matchIDclick;
+	}
+
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Uri uri = DatabaseContract.ScoresTable.buildScoreWithDate();
-		return new CursorLoader(getActivity(), uri, null, null, mFragmentDate, null);
+        return new CursorLoader(getActivity(), DatabaseContract.ScoresTable.buildScoreWithDate(),
+                null, null, mFragmentDate, null);
     }
 
     @Override
