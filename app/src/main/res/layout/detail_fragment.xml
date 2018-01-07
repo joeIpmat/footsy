@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:background="#8BC34A"
         android:orientation="horizontal">
 
@@ -21,7 +21,8 @@
             android:gravity="center"
             android:text="@string/test_text"
             android:textAllCaps="true"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/matchday_textview"
@@ -33,17 +34,19 @@
             android:gravity="center"
             android:text="@string/test_text"
             android:textAllCaps="true"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/share_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#8BC34A"
             android:contentDescription="@string/football_share"
             android:text="@string/share_text"
-            android:background="#8BC34A"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
 
     </LinearLayout>
 

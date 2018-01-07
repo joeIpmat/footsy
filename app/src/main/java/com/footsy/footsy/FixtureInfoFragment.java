@@ -24,14 +24,16 @@ import android.widget.TextView;
 public class FixtureInfoFragment extends Fragment
 		implements LoaderManager.LoaderCallbacks<Cursor> {
 
+	private final static String TAG = "FixtureInfoFragment";
 	private H2hAdapter mAdapter;
-	private static final int H2H_LOADER = 0;
+	public static final int H2H_LOADER = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
 		updateH2h();
         View rootView = inflater.inflate(R.layout.fragment_fixture_info, container, false);
+
 		mAdapter = new H2hAdapter(getActivity(), null, 0);
 		final ListView mListView = rootView.findViewById(R.id.statistics);
 		mListView.setAdapter(mAdapter);
@@ -55,7 +57,7 @@ public class FixtureInfoFragment extends Fragment
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-		cursor.moveToFirst();
+		cursor.moveToLast();
 		while (!cursor.isAfterLast()) {
 			cursor.moveToNext();
 		}

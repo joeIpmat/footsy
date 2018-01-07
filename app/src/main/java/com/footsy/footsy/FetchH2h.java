@@ -151,27 +151,15 @@ public class FetchH2h extends IntentService {
 		String mDraws;
 		String mGoalsHomeTeam;
 		String mGoalsAwayTeam;
-		ContentValues h2hValues = new ContentValues();
+		//ContentValues h2hValues = new ContentValues();
 
 		/** head to head **/
 		try {
 			JSONObject h2hData = new JSONObject(jsonData).getJSONObject(HEAD2HEAD);
 			JSONObject currentMatch = new JSONObject(jsonData).getJSONObject("fixture");
 			JSONArray h2hMatches = new JSONObject(jsonData).getJSONObject("head2head").getJSONArray(FIXTURES);
+
 			Vector<ContentValues> values = new Vector<>(h2hMatches.length());
-
-			mHomeTeamwins = h2hData.optString(HOMEWINS);
-			mAwayTeamWins = h2hData.optString(AWAYWINS);
-			mDraws = h2hData.optString(DRAWS);
-
-			mMatchDate = currentMatch.getString(DATE);
-			mMatchDate = mMatchDate.substring(0, mMatchDate.indexOf("T"));
-
-			h2hValues.put(DatabaseContract.H2hTable.MATCH_ID, matchID);
-			h2hValues.put(DatabaseContract.H2hTable.HOME_TEAM_WINS, mHomeTeamwins);
-			h2hValues.put(DatabaseContract.H2hTable.AWAY_TEAM_WINS, mAwayTeamWins);
-			h2hValues.put(DatabaseContract.H2hTable.DRAWS, mDraws);
-			h2hValues.put(DatabaseContract.H2hTable.MATCH_DATE, mMatchDate);
 
 			for(int i = 0; i < h2hMatches.length(); i++) {
 				JSONObject match_data = h2hMatches.getJSONObject(i);
@@ -180,19 +168,39 @@ public class FetchH2h extends IntentService {
 				mGoalsAwayTeam = match_data.getJSONObject(RESULT).getString(AWAY_GOALS);
 				mGoalsHomeTeam = match_data.getJSONObject(RESULT).getString(HOME_GOALS);
 
-				h2hValues.put(DatabaseContract.H2hTable.HOME_TEAM, mHome);
-				h2hValues.put(DatabaseContract.H2hTable.AWAY_TEAM, mAway);
-				h2hValues.put(DatabaseContract.H2hTable.GOAL_AWAY_TEAM, mGoalsAwayTeam);
-				h2hValues.put(DatabaseContract.H2hTable.GOAL_HOME_TEAM, mGoalsHomeTeam);
+				ContentValues matchValues = new ContentValues();
+				matchValues.put(DatabaseContract.H2hTable.HOME_TEAM, mHome);
+				matchValues.put(DatabaseContract.H2hTable.AWAY_TEAM, mAway);
+				matchValues.put(DatabaseContract.H2hTable.GOAL_AWAY_TEAM, mGoalsAwayTeam);
+				matchValues.put(DatabaseContract.H2hTable.GOAL_HOME_TEAM, mGoalsHomeTeam);
 
-				values.add(h2hValues);
+				//not involved in loop
+				mHomeTeamwins = h2hData.optString(HOMEWINS);
+				mAwayTeamWins = h2hData.optString(AWAYWINS);
+				mDraws = h2hData.optString(DRAWS);
+
+				mMatchDate = currentMatch.getString(DATE);
+				mMatchDate = mMatchDate.substring(0, mMatchDate.indexOf("T"));
+
+				matchValues.put(DatabaseContract.H2hTable.MATCH_ID, matchID);
+				matchValues.put(DatabaseContract.H2hTable.HOME_TEAM_WINS, mHomeTeamwins);
+				matchValues.put(DatabaseContract.H2hTable.AWAY_TEAM_WINS, mAwayTeamWins);
+				matchValues.put(DatabaseContract.H2hTable.DRAWS, mDraws);
+				matchValues.put(DatabaseContract.H2hTable.MATCH_DATE, mMatchDate);
+
+				values.add(matchValues);
 			}
+
 			int inserted_data;
 			ContentValues[] insertData = new ContentValues[values.size()];
 			values.toArray(insertData);
 			inserted_data = mContext.getContentResolver()
 					.bulkInsert(DatabaseContract.H2hTable.buildH2hWithID(), insertData);
 			Log.v(TAG,"Succesfully Inserted h2h : " + String.valueOf(inserted_data));
+
+			for(int i = 0; i<insertData.length; i++) {
+				Log.v(TAG, "Contentvalue : " + insertData.toString());
+			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

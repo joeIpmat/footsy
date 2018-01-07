@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void findViewsById() {
-        title1 = (TextView) findViewById(R.id.title1);
-        listView = (ListView) findViewById(R.id.list);
-        button1 = (Button) findViewById(R.id.button1);
+        title1 = findViewById(R.id.title1);
+        listView = findViewById(R.id.list);
+		button1 = findViewById(R.id.button1);
     }
 
     @Override

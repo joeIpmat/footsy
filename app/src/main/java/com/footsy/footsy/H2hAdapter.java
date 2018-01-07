@@ -13,10 +13,6 @@ import android.widget.CursorAdapter;
 
 public class H2hAdapter extends CursorAdapter {
 
-	public static final int COL_HOME = 3;
-	public static final int COL_AWAY = 4;
-	public static final int COL_HOME_GOALS = 6;
-	public static final int COL_AWAY_GOALS = 7;
 	public static final int COL_ID = 8;
 	public double detailMatchId = 0;
 
@@ -39,9 +35,12 @@ public class H2hAdapter extends CursorAdapter {
 //		mHolder.awayTeamName.setText(cursor.getString(COL_AWAY));
 		int homeIndex = cursor.getColumnIndex(DatabaseContract.H2hTable.HOME_TEAM);
 		int awayIndex = cursor.getColumnIndex(DatabaseContract.H2hTable.AWAY_TEAM);
+		int scoreAwayIndex = cursor.getColumnIndex(DatabaseContract.H2hTable.GOAL_AWAY_TEAM);
+		int scoreHomeIndex = cursor.getColumnIndex(DatabaseContract.H2hTable.GOAL_HOME_TEAM);
 		mHolder.homeTeamName.setText(cursor.getString(homeIndex));
 		mHolder.awayTeamName.setText(cursor.getString(awayIndex));
-		mHolder.score.setText(Utility.getScores(cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS)));
+		mHolder.score.setText(Utility.getScores(cursor.getInt(scoreHomeIndex),
+				cursor.getInt(scoreAwayIndex)));
 		mHolder.matchId = cursor.getDouble(COL_ID);
 	}
 }

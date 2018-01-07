@@ -37,7 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         /** Head2Head Table **/
         final String CreateHead2HeadTable = "CREATE TABLE " + DatabaseContract.TABLE_HEAD2HEAD + " ("
-				+ DatabaseContract.ScoresTable._ID + " INTEGER PRIMARY KEY,"
+				+ DatabaseContract.H2hTable._ID + " INTEGER PRIMARY KEY,"
                 + DatabaseContract.H2hTable.MATCH_ID + " INTEGER NOT NULL,"
 				+ DatabaseContract.H2hTable.MATCH_DATE + " TEXT NOT NULL,"
                 + DatabaseContract.H2hTable.HOME_TEAM_WINS + " INTEGER,"
@@ -46,8 +46,8 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ DatabaseContract.H2hTable.AWAY_TEAM + " INTEGER,"
 				+ DatabaseContract.H2hTable.HOME_TEAM + " INTEGER,"
 				+ DatabaseContract.H2hTable.GOAL_AWAY_TEAM + " INTEGER,"
-				+ DatabaseContract.H2hTable.GOAL_HOME_TEAM + " INTEGER,"
-				+ " UNIQUE (" + DatabaseContract.H2hTable.MATCH_ID + ") ON CONFLICT REPLACE"
+				+ DatabaseContract.H2hTable.GOAL_HOME_TEAM + " INTEGER"
+//				+ " UNIQUE (" + DatabaseContract.H2hTable.MATCH_ID + ") ON CONFLICT REPLACE"
 				+ " );";
         db.execSQL(CreateHead2HeadTable);
     }
@@ -58,5 +58,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.SCORES_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.TABLE_HEAD2HEAD);
     }
+
+    /** EUREKA FINALLY MADE THIS **/
+    public void deleteAll() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.delete(DatabaseContract.TABLE_HEAD2HEAD,null,null);
+	}
 
 }

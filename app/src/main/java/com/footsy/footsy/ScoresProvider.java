@@ -154,14 +154,6 @@ public class ScoresProvider extends ContentProvider {
 				db.beginTransaction();
 				returnCount = 0;
 				try {
-//					for (ContentValues value : values) {
-//						long id = db.insertWithOnConflict(DatabaseContract.TABLE_HEAD2HEAD, null, value,
-//								SQLiteDatabase.CONFLICT_REPLACE);
-//						if (id != -1) {
-//							returnCount++;
-//						}
-//					}
-//					db.setTransactionSuccessful();
 					for (ContentValues value : values) {
 						long id = db.insertWithOnConflict(DatabaseContract.TABLE_HEAD2HEAD, null, value,
 								SQLiteDatabase.CONFLICT_REPLACE);
@@ -172,16 +164,14 @@ public class ScoresProvider extends ContentProvider {
 						}
 					}
 					db.setTransactionSuccessful();
-				} catch (IllegalStateException e) {
-					e.printStackTrace();
 				} finally {
 					db.endTransaction();
 				}
 				getContext().getContentResolver().notifyChange(uri, null);
 				return returnCount;
 
-            default:
-                return super.bulkInsert(uri, values);
+			default:
+				return super.bulkInsert(uri, values);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.footsy.footsy;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -29,6 +30,7 @@ public class MainScreenFragment extends Fragment
     private static final int SCORES_LOADER = 0;
 	private static String matchIDclick = "";
 
+	public View noMatch;
     public void setFragmentDate(String date) {
         mFragmentDate[0] = date;
     }
@@ -39,24 +41,30 @@ public class MainScreenFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         mAdapter = new ScoresAdapter(getActivity(), null, 0);
-        final ListView mScoreList = rootView.findViewById(R.id.scoreList);
-        mScoreList.setAdapter(mAdapter);
+		noMatch = rootView.findViewById(R.id.conempty);
 
-        getLoaderManager().initLoader(SCORES_LOADER, null, this);
-        mAdapter.detailMatchId = FixtureList.selectedMatchId;
+		final ListView mScoreList = rootView.findViewById(R.id.scoreList);
+		mScoreList.setAdapter(mAdapter);
+		mScoreList.setEmptyView(noMatch);
 
-        mScoreList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		getLoaderManager().initLoader(SCORES_LOADER, null, this);
+		mAdapter.detailMatchId = FixtureList.selectedMatchId;
+
+		mScoreList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				/** get the matchID **/
 				Cursor curr = (Cursor) mScoreList.getItemAtPosition(position);
 				matchIDclick = curr.getString(8).substring(1);
 				//Log.d("Position:", Integer.toString(position) + "Cursor: " + name);
-
+				/** EUREKA FINALLY MADE IT **/
+				DBHelper db = new DBHelper(getContext());
+				db.deleteAll();
 				Intent intent = new Intent(getActivity(), FixtureInfo.class);
 				startActivity(intent);
-            }
-        });
+			}
+		});
+
 
         return rootView;
     }
